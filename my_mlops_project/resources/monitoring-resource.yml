@@ -17,6 +17,7 @@ common_permissions: &permissions
       group_name: users
 
 resources:
+  # lines 20-32 are monitor configuration for Lakehouse Monitoring
   quality_monitors:
     my_mlops_project_quality_monitor:
       table_name: dev.my_mlops_project.predictions
@@ -49,7 +50,7 @@ resources:
               metric_to_monitor: root_mean_squared_error
               metric_violation_threshold: 100
               num_evaluation_windows: 5
-              num_violation_windows: 2
+              num_violation_windows: 2 # 2 out of last 5 evaluation windows have metrics worse than threshold
               # git source information of current ML resource deployment. It will be persisted as part of the workflow run
               git_source_info: url:${bundle.git.origin_url}; branch:${bundle.git.branch}; commit:${bundle.git.commit}
 
